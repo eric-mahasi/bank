@@ -6,14 +6,18 @@ b = account.Account("eric", 234, 10000, 54, 256, 50)
 class Bank(object):
     """Driver class that runs the entire program."""
 
-    def __init__(self, msg, user_choice):
-        self.msg = 'Welcome user!\n' + '\nPlease select an action ' + \
-            '\n1---Withdraw' + '\n2---Deposit' + '\n3---Check balance' + \
-            '\n4---Exit'
-        self.user_choice = user_choice
+    def __init__(self):
+        """yet to decide what variables to initialize"""
 
-    def welcome_msg(self):
-        print(self.msg)
+    def display_welcome_msg(self):
+        msg = 'Welcome user!\n' + '\nPlease select an action ' + \
+              '\n1---Withdraw' + '\n2---Deposit' + '\n3---Check balance' + \
+              '\n4---Exit'
+        print(msg)
+
+    def get_user_choice(self):
+        self.user_choice = int(input(" "))
+        print(self.user_choice)
 
     def evaluate_user_choice(self, user_choice):
         if self.user_choice == 1:
@@ -40,6 +44,7 @@ class Bank(object):
         self.evaluate_user_choice(self.user_choice)
 
 
-a = Bank(" ", 3)
-a.welcome_msg()
-a.evaluate_user_choice(4)
+a = Bank()
+a.display_welcome_msg()
+a.get_user_choice()
+# a.evaluate_user_choice(4)
