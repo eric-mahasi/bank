@@ -16,7 +16,10 @@ class Account(object):
         print(self.account_balance)
 
     def withdraw(self, withdraw_amount):
-        self.account_balance -= withdraw_amount
+        if self.withdraw_amount >= self.lower_limit:
+            print("Sorry, transaction prohibited. Cannot exceed withdrawal limit. ")
+        else:
+            self.account_balance -= withdraw_amount
 
     def deposit(self, deposit_amount):
         self.account_balance += deposit_amount
