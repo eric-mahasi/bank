@@ -17,34 +17,30 @@ class Bank(object):
 
     def get_user_choice(self):
         self.user_choice = int(input(" "))
-        print(self.user_choice)
 
     def evaluate_user_choice(self, user_choice):
-        if self.user_choice == 1:
+        if user_choice == 1:
             # ask for amount use setter method use getter in next line
             b.amount = int(input("Please enter the amount you with to withdraw: "))
             b.withdraw(b.amount)
-        elif self.user_choice == 2:
+        elif user_choice == 2:
             # ask for amount use setter method use getter in next line
             b.amount = int(input("Please enter the amount you wish to deposit"))
             b.deposit(b.amount)
-        elif self.user_choice == 3:
+        elif user_choice == 3:
             # use getter method to display balance
             print("You current account balance is: ", b.account_balance)
-        elif self.user_choice == 4:
-            # quit the program
+        elif user_choice == 4:
             sys.exit()
         else:
             # throw wrong input type error
             try:
                 type(self.user_choice) != int
             except TypeError:
-                print("Please make sure that you have typed a correct number")
-
-        self.evaluate_user_choice(self.user_choice)
+                print("Please make sure that you have typed a correct number: ")
 
 
 a = Bank()
 a.display_welcome_msg()
 a.get_user_choice()
-# a.evaluate_user_choice(4)
+a.evaluate_user_choice(a.user_choice)
