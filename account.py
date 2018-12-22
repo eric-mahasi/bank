@@ -13,7 +13,7 @@ class Account(object):
         self.withdraw_limit = withdraw_limit
 
     def display_balance(self):
-        print(self.account_balance)
+        return self.account_balance
 
     def withdraw(self, withdraw_amount):
         if self.withdraw_amount >= self.lower_limit:

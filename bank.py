@@ -27,16 +27,13 @@ class Bank(object):
             b.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
             b.deposit(b.deposit_amount)
         elif user_choice == 3:
-            print("You current account balance is: ", b.account_balance)
+            print("You current account balance is: ", b.display_balance())
         elif user_choice == 4:
+            print("Quitting... ")
             sys.exit()
         else:
-            # TODO handle inputs outside the acceptable range of values
-            # TODO improve error handling for non-int input types
-            try:
-                type(self.user_choice) != int
-            except TypeError:
-                print("Please make sure that you have typed a correct number: ")
+            # TODO Handle errors for non-int inputs
+            print("Invalid choice. Please try again: ")
 
 
 a = Bank()
