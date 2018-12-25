@@ -13,11 +13,6 @@ def initialize_objects():
 class Bank(object):
     """Driver class that runs the entire program."""
 # TODO figure out variables to be instantiated in init function, if any necessary
-# TODO add functionality:
-# 1) Modify objects to allow parameter values to be input by user such that each user creates a different object
-# 2) Allow different users to access their own different accounts
-# 3) Enhance navigation through menus
-
     def __init__(self):
         self.user_choice = 0
         pass
@@ -26,7 +21,16 @@ class Bank(object):
         msg = 'Welcome user!\n' + '\nPlease select an action ' + \
               '\n1---Withdraw' + '\n2---Deposit' + '\n3---Check balance' + \
               '\n4---Exit'
-        print(msg)
+        return msg
+
+    # TODO add functionality:
+    # 1) Modify objects to allow parameter values to be input by user such that each user creates a different object;
+    # account creation
+    # 2) Allow different users to access their own different accounts; login verification
+    # 3) Enhance navigation through menus
+    def nav_menu(self):
+        """Allows users to navigate through the several menus"""
+        print("Do you have an account? ")
 
     def get_user_choice(self):
         self.user_choice = int(input())
