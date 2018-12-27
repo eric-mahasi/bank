@@ -2,14 +2,6 @@ import account
 import sys
 
 
-# FIXME probably useless function?
-def initialize_objects():
-    global eric, victor, test
-    eric = account.Account("eric", 1, 10000, 54, 256, 50)
-    victor = account.Account("victor", 2, 3500, 8493, 2097, 672)
-    test = account.Account("test", 3, 15688, 65984, 245788, 1000)
-
-
 class Bank(object):
     """Driver class that runs the entire program."""
     def __init__(self):
@@ -20,14 +12,14 @@ class Bank(object):
         self.account_balance = 0
         self.withdraw_amount = 0
         self.withdraw_limit = 0
+        self.msg = ""
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount, self.withdraw_limit)
-    # FIXME deal with static method
-    def display_welcome_msg(self):
-        msg = 'Welcome user!\n' + '\nPlease select an action ' + \
-              '\n1---Withdraw' + '\n2---Deposit' + '\n3---Check balance' + \
-              '\n4---Exit'
-        return msg
+
+    def display_welcome_msg(self):  # TODO rename this function to something more suiting
+        self.msg = "\nPlease select an action " + "\n1---Withdraw" + "\n2---Deposit" + "\n3---Check balance" + \
+                   "\n4---Exit"
+        print(self.msg)
 
     # TODO add functionality:
     # 1) Allow different users to access their own different accounts
@@ -35,13 +27,17 @@ class Bank(object):
     def nav_menu(self):
         """Allows users to navigate through the several menus."""
         print("Welcome user... ")
-        n = input("Do you have an account? Y/N")
+        n = input("Do you have an account? Y/N ")  # TODO choose more descriptive variable name
         if n.lower() == "y":
             self.verify_login()
         elif n.lower() == "n":
-            print("Please wait while we create an account for you... ")
+            print("Please be patient while we set up an account for you... ")
             self.create_account()
+            print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + "\n")
+        else:
+            print("Invalid choice. Please try again")
 
+# TODO provide much more informative print statements; clarify output
     def create_account(self):
         """Create an account, passing user input into the parameters for Account objects. Returns an Account object."""
         self.account_name = input("Account name: ")
@@ -56,7 +52,7 @@ class Bank(object):
         # TODO improve security by adding password functionality to user accounts
         pass
 
-    def get_user_choice(self):
+    def get_user_choice(self):  # FIXME probably no point in this being a function
         self.user_choice = int(input())
 
     def evaluate_user_choice(self, user_choice):
