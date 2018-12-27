@@ -2,14 +2,14 @@
 class Account(object):
     """This class handles all the basic operations of a rudimentary bank account."""
 
-    def __init__(self, account_name, account_id, account_balance, deposit_amount, withdraw_amount, withdraw_limit):
+    def __init__(self, account_name, account_id, account_balance, deposit_amount, withdraw_amount):
         self.account_name = account_name
         self.account_id = account_id
         self.account_balance = account_balance
         self.deposit_amount = deposit_amount
         self.withdraw_amount = withdraw_amount
         self.lower_limit = 1000
-        self.withdraw_limit = withdraw_limit
+        self.account_pin = 0
 
     def display_balance(self):
         return self.account_balance
