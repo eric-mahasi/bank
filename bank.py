@@ -12,10 +12,10 @@ class Bank(object):
         self.deposit_amount = 0
         self.account_balance = 0
         self.withdraw_amount = 0
-        self.withdraw_limit = 0
+        self.account_pin = 0
         self.menu_msg = ""
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
-                                           self.deposit_amount, self.withdraw_amount, self.withdraw_limit)
+                                           self.deposit_amount, self.withdraw_amount)
 
     def show_main_menu(self):
         self.menu_msg = "\nPlease select an action " + "\n1---Withdraw" + "\n2---Deposit" + "\n3---Check balance" + \
@@ -29,10 +29,10 @@ class Bank(object):
     def navigate_menu(self):
         """Allows users to navigate through the several menus."""
         print("Welcome user... ")
-        n = input("Do you have an account? Y/N ")  # TODO choose more descriptive variable name
-        if n.lower() == "y":
+        self.user_choice = input("Do you have an account? Y/N ")
+        if self.user_choice.lower() == "y":
             self.verify_login()
-        elif n.lower() == "n":
+        elif self.user_choice.lower() == "n":
             self.create_account()
         else:
             print("Invalid choice. Please try again.")
@@ -43,9 +43,12 @@ class Bank(object):
         print("\nKindly enter the appropriate values after each prompt below. ")
         self.account_name = input("Account name: ")
         self.account_id = int(input("Account ID: "))
-        self.account_balance = int(input("Account balance: "))
+        self.account_balance = int(input("Account balance: "))  # FIXME condition to prevent account balances lower than
+        #  lower limit not working
+        self.account_pin = int(input("Account PIN: "))  # TODO make account pin 4 digits minimum
+        # TODO add confirm pin functionality
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
-                                           self.deposit_amount, self.withdraw_amount, self.withdraw_limit)
+                                           self.deposit_amount, self.withdraw_amount)
         print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + ".")
         return self.object_name
 
@@ -54,13 +57,14 @@ class Bank(object):
         # TODO improve security by adding password attribute to user accounts
         pass
 
-    def get_user_choice(self):  # FIXME probably no point in this being a function
+    def get_user_choice(self):  # FIXME probably no point in this being a function??
         self.user_choice = int(input())
 
     def evaluate_user_choice(self):
         if self.user_choice == 1:
             self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
-            self.object_name.withdraw(self.withdraw_amount)
+            self.object_name.withdraw(self.withdraw_amount)  # FIXME condition to prevent account balances lower than
+        #  lower limit not working
         elif self.user_choice == 2:
             self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
             self.object_name.deposit(self.deposit_amount)
