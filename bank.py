@@ -6,6 +6,7 @@ class Bank(object):
     """Driver class that runs the entire program."""
 
     def __init__(self):
+        self.lower_limit = 1000
         self.user_choice = 0
         self.account_name = ""
         self.account_id = 0
@@ -36,6 +37,7 @@ class Bank(object):
             self.create_account()
         else:
             print("Invalid choice. Please try again.")
+            self.navigate_menu()
 
     def create_account(self):
         """Create an account, passing user input into the parameters for Account objects. Returns an Account object."""
@@ -45,6 +47,9 @@ class Bank(object):
         self.account_id = int(input("Account ID: "))
         self.account_balance = int(input("Account balance: "))  # FIXME condition to prevent account balances lower than
         #  lower limit not working
+        if self.account_balance <= self.lower_limit:
+            print("Error. Please enter an amount larger than ", self.lower_limit)
+            # TODO loop inputting initial balance till it meets lower limit requirement
         self.account_pin = int(input("Account PIN: "))  # TODO make account pin 4 digits minimum
         # TODO add confirm pin functionality
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
