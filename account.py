@@ -8,8 +8,6 @@ class Account(object):
         self.account_balance = account_balance
         self.deposit_amount = deposit_amount
         self.withdraw_amount = withdraw_amount
-        self.lower_limit = 1000
-        self.account_pin = 0
 
     def display_balance(self):
         return self.account_balance
