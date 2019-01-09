@@ -14,6 +14,7 @@ class Bank(object):
         self.account_balance = 0
         self.withdraw_amount = 0
         self.account_pin = 0
+        self.account_pin_confirm = 0
         self.menu_msg = ""
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
@@ -44,7 +45,7 @@ class Bank(object):
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate values after each prompt below. ")
         self.account_name = input("Account name: ")
-        self.account_id = int(input("Account ID: "))  # TODO generate account ID sequentially from already existing
+        # self.account_id = int(input("Account ID: "))  # TODO generate account ID sequentially from already existing
         # accounts
         while True:
             self.account_balance = int(input("Account balance: "))
@@ -52,8 +53,15 @@ class Bank(object):
                 print("Error. Please enter an amount larger than ", self.lower_limit)
             else:
                 break
-        # self.account_pin = int(input("Account PIN: "))  # TODO make account pin 4 digits minimum
-        # TODO add confirm pin functionality
+        while True:
+            self.account_pin = input("Account PIN: ")  # TODO make account pin 4 digits minimum
+            if len(self.account_pin) < 4:
+                print("PIN must be at least four digits.")
+            else:
+                self.account_pin_confirm = input("Please enter PIN again: ")
+                if self.account_pin == self.account_pin_confirm:
+                    print("PIN successfully recorded.")
+                break
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
         print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + ".")
