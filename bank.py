@@ -53,15 +53,20 @@ class Bank(object):
                 print("Error. Please enter an amount larger than ", self.lower_limit)
             else:
                 break
+        # FIXME pin confirmation doesn't really work
         while True:
-            self.account_pin = input("Account PIN: ")  # TODO make account pin 4 digits minimum
+            self.account_pin = input("Account PIN: ")
             if len(self.account_pin) < 4:
                 print("PIN must be at least four digits.")
             else:
-                self.account_pin_confirm = input("Please enter PIN again: ")
-                if self.account_pin == self.account_pin_confirm:
-                    print("PIN successfully recorded.")
-                break
+                while True:
+                    self.account_pin_confirm = input("Please enter PIN again: ")
+                    if self.account_pin == self.account_pin_confirm:
+                        print("PIN successfully recorded.")
+                    else:
+                        print("PINs do not match. Please try again.")
+                        break
+            break
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
         print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + ".")
@@ -70,7 +75,13 @@ class Bank(object):
     def verify_login(self):
         """Check if account name and account id provided by user match those stored in file."""
         # TODO improve security by adding PIN attribute to user accounts
-        pass
+        print("Please be patient while we verify your details...")
+        print("\nKindly enter the appropriate values after each prompt below. ")
+        self.account_name = input("Account name: ")
+        self.account_id = input("Account ID: ")
+        self.account_pin = input("Account PIN: ")
+        # TODO compare these values with those stored in the file
+        # TODO figure out how to handle storing and accessing user account details in the file
 
     def get_user_choice(self):  # FIXME probably no point in this being a function??
         self.user_choice = int(input())
