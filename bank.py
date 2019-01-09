@@ -6,7 +6,7 @@ class Bank(object):
     """Driver class that runs the entire program."""
 
     def __init__(self):
-        self.lower_limit = 1000
+        self.lower_limit = 1000  # FIXME accounts should by default have this balance when objects are initialized
         self.user_choice = 0
         self.account_name = ""
         self.account_id = 0
@@ -44,13 +44,15 @@ class Bank(object):
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate values after each prompt below. ")
         self.account_name = input("Account name: ")
-        self.account_id = int(input("Account ID: "))
-        self.account_balance = int(input("Account balance: "))  # FIXME condition to prevent account balances lower than
-        #  lower limit not working
-        if self.account_balance <= self.lower_limit:
-            print("Error. Please enter an amount larger than ", self.lower_limit)
-            # TODO loop inputting initial balance till it meets lower limit requirement
-        self.account_pin = int(input("Account PIN: "))  # TODO make account pin 4 digits minimum
+        self.account_id = int(input("Account ID: "))  # TODO generate account ID sequentially from already existing
+        # accounts
+        while True:
+            self.account_balance = int(input("Account balance: "))
+            if self.account_balance <= self.lower_limit:
+                print("Error. Please enter an amount larger than ", self.lower_limit)
+            else:
+                break
+        # self.account_pin = int(input("Account PIN: "))  # TODO make account pin 4 digits minimum
         # TODO add confirm pin functionality
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
@@ -59,7 +61,7 @@ class Bank(object):
 
     def verify_login(self):
         """Check if account name and account id provided by user match those stored in file."""
-        # TODO improve security by adding password attribute to user accounts
+        # TODO improve security by adding PIN attribute to user accounts
         pass
 
     def get_user_choice(self):  # FIXME probably no point in this being a function??
@@ -68,8 +70,10 @@ class Bank(object):
     def evaluate_user_choice(self):
         if self.user_choice == 1:
             self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
-            self.object_name.withdraw(self.withdraw_amount)  # FIXME condition to prevent account balances lower than
-        #  lower limit not working
+            if self.withdraw_amount >= self.lower_limit:
+                print("Prohibited transaction. Withdrawal amount exceeded.")
+            else:
+                self.object_name.withdraw(self.withdraw_amount)
         elif self.user_choice == 2:
             self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
             self.object_name.deposit(self.deposit_amount)
