@@ -6,12 +6,12 @@ class Bank(object):
     """Driver class that runs the entire program."""
 
     def __init__(self):
-        self.lower_limit = 1000  # FIXME accounts should by default have this balance when objects are initialized
+        self.lower_limit = 1000
         self.user_choice = 0
         self.account_name = ""
         self.account_id = 0
         self.deposit_amount = 0
-        self.account_balance = 0
+        self.account_balance = 1000
         self.withdraw_amount = 0
         self.account_pin = 0
         self.account_pin_confirm = 0
@@ -43,17 +43,19 @@ class Bank(object):
     def create_account(self):
         """Create an account, passing user input into the parameters for Account objects. Returns an Account object."""
         print("Please be patient while we set up an account for you... ")
-        print("\nKindly enter the appropriate values after each prompt below. ")
+        print("\nKindly enter the appropriate information after each prompt below. ")
         self.account_name = input("Account name: ")
         # self.account_id = int(input("Account ID: "))  # TODO generate account ID sequentially from already existing
         # accounts
         while True:
-            self.account_balance = int(input("Account balance: "))
+            self.account_balance = int(input("Initial deposit amount: "))
             if self.account_balance <= self.lower_limit:
-                print("Error. Please enter an amount larger than ", self.lower_limit)
+                print("Account balances lower than", self.lower_limit, "are not allowed. Please try again.")
             else:
                 break
-        # FIXME pin confirmation doesn't really work
+        # FIXME PIN functionality works for only one iteration instead of continually till the required conditions
+        # are met
+        # TODO make confirm pin into a method of it's own
         while True:
             self.account_pin = input("Account PIN: ")
             if len(self.account_pin) < 4:
@@ -74,7 +76,6 @@ class Bank(object):
 
     def verify_login(self):
         """Check if account name and account id provided by user match those stored in file."""
-        # TODO improve security by adding PIN attribute to user accounts
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below. ")
         self.account_name = input("Account name: ")
@@ -83,7 +84,7 @@ class Bank(object):
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account details in the file
 
-    def get_user_choice(self):  # FIXME probably no point in this being a function??
+    def get_user_choice(self):
         self.user_choice = int(input())
 
     def evaluate_user_choice(self):
@@ -102,7 +103,7 @@ class Bank(object):
             print("Quitting... ")
             sys.exit()
         else:
-            # TODO Handle errors for non-int inputs
+            # TODO Handle errors for non-int inputs maybe in unit tests
             print("Invalid choice. Please try again: ")
 
 
