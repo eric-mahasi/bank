@@ -53,26 +53,35 @@ class Bank(object):
                 print("Account balances lower than", self.lower_limit, "are not allowed. Please try again.")
             else:
                 break
-        # FIXME PIN functionality works for only one iteration instead of continually till the required conditions
-        # are met
-        # TODO make confirm pin into a method of it's own
+        self.confirm_pin()
+        self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
+                                           self.deposit_amount, self.withdraw_amount)
+        print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + ".")
+        return self.object_name
+
+    # FIXME PIN functionality works for only one iteration instead of continually till the required conditions
+    # are met
+
+    def confirm_pin(self):
+        """Handles a 4-digit number that will be used as a PIN for accessing user accounts. Ensures that the PIN is
+         entered correctly by having the user enter it twice and the two entries are then compared to each other.
+         Returns PIN."""
         while True:
             self.account_pin = input("Account PIN: ")
-            if len(self.account_pin) < 4:
+            # FIXME this if loop runs infinitely
+            if len(str(self.account_pin)) < 4:
                 print("PIN must be at least four digits.")
+                break
             else:
+                self.account_pin_confirm = input("Please enter PIN again: ")
                 while True:
-                    self.account_pin_confirm = input("Please enter PIN again: ")
                     if self.account_pin == self.account_pin_confirm:
                         print("PIN successfully recorded.")
                     else:
                         print("PINs do not match. Please try again.")
                         break
-            break
-        self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
-                                           self.deposit_amount, self.withdraw_amount)
-        print("\nAccount creation successful. Welcome " + str(self.object_name.account_name.title()) + ".")
-        return self.object_name
+                break
+        return self.account_pin
 
     def verify_login(self):
         """Check if account name and account id provided by user match those stored in file."""
@@ -81,6 +90,7 @@ class Bank(object):
         self.account_name = input("Account name: ")
         self.account_id = input("Account ID: ")
         self.account_pin = input("Account PIN: ")
+        # self.confirm_pin()
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account details in the file
 
