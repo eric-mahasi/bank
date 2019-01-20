@@ -19,26 +19,17 @@ class Bank(object):
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
 
-    # TODO provide meaningful output messages after each transaction
     def show_main_menu(self):
-        # TODO move all the logic for these actions into the account class
         self.menu_msg = "\nPlease select an action " + "\n1---Withdraw" + "\n2---Deposit" + "\n3---Check balance" + \
                         "\n4---Log out" + "\n5---Exit"
         print(self.menu_msg)
         self.user_choice = int(input())
         if self.user_choice == 1:
-            self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
-            if self.withdraw_amount >= self.account_balance:
-                print("Prohibited transaction. Account balances lower than", self.lower_limit, "are not allowed. Please"
-                                                                                               "try again.")
-            else:
-                # TODO prevent account balances lower than lower limit
-                self.object_name.withdraw(self.withdraw_amount)
+            self.object_name.withdraw()
         elif self.user_choice == 2:
-            self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
-            self.object_name.deposit(self.deposit_amount)
+            self.object_name.deposit()
         elif self.user_choice == 3:
-            print("Your current account balance is: ", self.object_name.display_balance())
+            print("Your current account balance is: ", self.object_name.account_balance)
         elif self.user_choice == 4:
             self.log_in_menu()
         elif self.user_choice == 5:
@@ -51,6 +42,7 @@ class Bank(object):
 
     # TODO add functionality:
     # 1) Allow different users to access their own different accounts
+    # TODO move all the following methods to account class
     def log_in_menu(self):
         """Allows users to navigate through the several menus."""
         print("Welcome...")
