@@ -19,17 +19,39 @@ class Bank(object):
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
 
+    # TODO choose better names for the menu screen methods
+    # TODO provide meaningful output messages after each transaction
     def show_main_menu(self):
         self.menu_msg = "\nPlease select an action " + "\n1---Withdraw" + "\n2---Deposit" + "\n3---Check balance" + \
                         "\n4---Exit"
         print(self.menu_msg)
+        self.user_choice = int(input())
+        if self.user_choice == 1:
+            self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
+            if self.withdraw_amount >= self.lower_limit:
+                print("Prohibited transaction. Withdrawal amount exceeded.")
+            else:
+                self.object_name.withdraw(self.withdraw_amount)
+        elif self.user_choice == 2:
+            self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
+            self.object_name.deposit(self.deposit_amount)
+        elif self.user_choice == 3:
+            print("Your current account balance is: ", self.object_name.display_balance())
+        elif self.user_choice == 4:
+            print("Quitting... ")
+            sys.exit()
+        else:
+            # TODO Handle errors for non-int inputs maybe in unit tests
+            print("Invalid choice. Please try again: ")
+        self.show_main_menu()
 
     # TODO add functionality:
     # 1) Allow different users to access their own different accounts
     # 2) Enhance navigation through menus. Make it possible for users to fluidly move through all the different menu
-    # screens
+    # screens, log out of account and go back to main menu
     def navigate_menu(self):
         """Allows users to navigate through the several menus."""
+        # TODO use consistent menu item numeration
         print("Welcome user... ")
         self.user_choice = input("Do you have an account? Y/N ")
         if self.user_choice.lower() == "y":
@@ -61,7 +83,6 @@ class Bank(object):
 
     # FIXME PIN functionality works for only one iteration instead of continually till the required conditions
     # are met
-
     def confirm_pin(self):
         """Handles a 4-digit number that will be used as a PIN for accessing user accounts. Ensures that the PIN is
          entered correctly by having the user enter it twice and the two entries are then compared to each other.
@@ -94,32 +115,8 @@ class Bank(object):
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account details in the file
 
-    def get_user_choice(self):
-        self.user_choice = int(input())
-
-    def evaluate_user_choice(self):
-        if self.user_choice == 1:
-            self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
-            if self.withdraw_amount >= self.lower_limit:
-                print("Prohibited transaction. Withdrawal amount exceeded.")
-            else:
-                self.object_name.withdraw(self.withdraw_amount)
-        elif self.user_choice == 2:
-            self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
-            self.object_name.deposit(self.deposit_amount)
-        elif self.user_choice == 3:
-            print("You current account balance is: ", self.object_name.display_balance())
-        elif self.user_choice == 4:
-            print("Quitting... ")
-            sys.exit()
-        else:
-            # TODO Handle errors for non-int inputs maybe in unit tests
-            print("Invalid choice. Please try again: ")
-
 
 # Objects for debugging purposes only
 a = Bank()
 a.navigate_menu()
 a.show_main_menu()
-a.get_user_choice()
-a.evaluate_user_choice()
