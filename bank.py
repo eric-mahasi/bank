@@ -19,18 +19,20 @@ class Bank(object):
         self.object_name = account.Account(self.account_name, self.account_id, self.account_balance,
                                            self.deposit_amount, self.withdraw_amount)
 
-    # TODO choose better names for the menu screen methods
     # TODO provide meaningful output messages after each transaction
     def show_main_menu(self):
+        # TODO move all the logic for these actions into the account class
         self.menu_msg = "\nPlease select an action " + "\n1---Withdraw" + "\n2---Deposit" + "\n3---Check balance" + \
-                        "\n4---Exit"
+                        "\n4---Log out" + "\n5---Exit"
         print(self.menu_msg)
         self.user_choice = int(input())
         if self.user_choice == 1:
             self.withdraw_amount = int(input("Please enter the amount you wish to withdraw: "))
-            if self.withdraw_amount >= self.lower_limit:
-                print("Prohibited transaction. Withdrawal amount exceeded.")
+            if self.withdraw_amount >= self.account_balance:
+                print("Prohibited transaction. Account balances lower than", self.lower_limit, "are not allowed. Please"
+                                                                                               "try again.")
             else:
+                # TODO prevent account balances lower than lower limit
                 self.object_name.withdraw(self.withdraw_amount)
         elif self.user_choice == 2:
             self.deposit_amount = int(input("Please enter the amount you wish to deposit: "))
@@ -38,6 +40,8 @@ class Bank(object):
         elif self.user_choice == 3:
             print("Your current account balance is: ", self.object_name.display_balance())
         elif self.user_choice == 4:
+            self.log_in_menu()
+        elif self.user_choice == 5:
             print("Quitting... ")
             sys.exit()
         else:
@@ -47,20 +51,18 @@ class Bank(object):
 
     # TODO add functionality:
     # 1) Allow different users to access their own different accounts
-    # 2) Enhance navigation through menus. Make it possible for users to fluidly move through all the different menu
-    # screens, log out of account and go back to main menu
-    def navigate_menu(self):
+    def log_in_menu(self):
         """Allows users to navigate through the several menus."""
-        # TODO use consistent menu item numeration
-        print("Welcome user... ")
-        self.user_choice = input("Do you have an account? Y/N ")
-        if self.user_choice.lower() == "y":
+        print("Welcome...")
+        print("\nPlease select an action " + "\n1---Log into my account" + "\n2---Create new account")
+        self.user_choice = int(input())
+        if self.user_choice == 1:
             self.verify_login()
-        elif self.user_choice.lower() == "n":
+        elif self.user_choice == 2:
             self.create_account()
         else:
             print("Invalid choice. Please try again.")
-            self.navigate_menu()
+            self.log_in_menu()
 
     def create_account(self):
         """Create an account, passing user input into the parameters for Account objects. Returns an Account object."""
@@ -89,7 +91,7 @@ class Bank(object):
          Returns PIN."""
         while True:
             self.account_pin = input("Account PIN: ")
-            # FIXME this if loop runs infinitely
+            # FIXME these if loops runs infinitely
             if len(str(self.account_pin)) < 4:
                 print("PIN must be at least four digits.")
                 break
@@ -118,5 +120,5 @@ class Bank(object):
 
 # Objects for debugging purposes only
 a = Bank()
-a.navigate_menu()
+a.log_in_menu()
 a.show_main_menu()
