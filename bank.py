@@ -41,17 +41,20 @@ class Bank(object):
     # TODO move all the following methods to account class
     def log_in_menu(self):
         """Allows users to navigate through the several menus."""
-        print("Welcome...")
-        print("\nPlease select an action " +
-              "\n1---Log into my account" + "\n2---Create new account")
-        user_choice = int(input())
-        if user_choice == 1:
-            self.verify_login()
-        elif user_choice == 2:
-            self.create_account()
-        else:
-            print("Invalid choice. Please try again.")
-            self.log_in_menu()
+        while True:
+            print("Welcome...")
+            print("\nPlease select an action "
+                  "\n1---Log into my account"
+                  "\n2---Create new account")
+
+            choices = {'1': self.verify_login,
+                       '2': self.create_account}
+            user_choice = choices.get(input())
+
+            if user_choice is not None:
+                user_choice()
+            else:
+                print("Invalid choice. Please try again.")
 
     def create_account(self):
         """
