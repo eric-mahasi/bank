@@ -10,31 +10,27 @@ class Bank(object):
         self.account_pin_confirm = 0
 
     def show_main_menu(self):
-        menu_msg = ("\nPlease select an action "
-                    "\n1---Withdraw"
-                    "\n2---Deposit"
-                    "\n3---Check balance"
-                    "\n4---Log out"
-                    "\n5---Exit")
-        print(menu_msg)
+        while True:
+            menu_msg = ("\nPlease select an action "
+                        "\n1---Withdraw"
+                        "\n2---Deposit"
+                        "\n3---Check balance"
+                        "\n4---Log out"
+                        "\n5---Exit")
+            print(menu_msg)
 
-        user_choice = int(input())
-        if user_choice == 1:
-            self.object_name.withdraw()
-        elif user_choice == 2:
-            self.object_name.deposit()
-        elif user_choice == 3:
-            print("Your current account balance is: ",
-                  self.object_name.account_balance)
-        elif user_choice == 4:
-            self.log_in_menu()
-        elif user_choice == 5:
-            print("Quitting... ")
-            sys.exit()
-        else:
-            # TODO Handle errors for non-int inputs maybe in unit tests
-            print("Invalid choice. Please try again: ")
-        self.show_main_menu()
+            choices = {'1': self.user_account.withdraw,
+                       '2': self.user_account.deposit,
+                       '3': self.user_account.print_account_balance,
+                       '4': self.log_in_menu,
+                       '5': self.quit}
+
+            user_choice = choices.get(input())
+            if user_choice is not None:
+                user_choice()
+            else:
+                # TODO Handle errors for non-int inputs maybe in unit tests
+                print("Invalid choice. Please try again: ")
 
     # TODO add functionality:
     # 1) Allow different users to access their own different accounts
@@ -79,12 +75,12 @@ class Bank(object):
             else:
                 break
         self.confirm_pin()
-        self.object_name = account.Account(
+        self.user_account = account.Account(
             account_name, account_id, account_balance,
             deposit_amount, withdraw_amount)
         print("\nAccount creation successful. Welcome " +
-              str(self.object_name.account_name.title()) + ".")
-        return self.object_name
+              str(self.user_account.account_name.title()) + ".")
+        return self.user_account
 
     # FIXME PIN functionality works for only one iteration instead of
     # continually till the required conditions are met
@@ -127,6 +123,10 @@ class Bank(object):
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account
         # details in the file
+
+    def quit(self):
+        print("Quitting... ")
+        sys.exit()
 
 
 # Objects for debugging purposes only

@@ -36,3 +36,6 @@ class Account(object):
               self.account_balance)
 
     # FIXME account balance takes the value of 0
+
+    def print_account_balance(self):
+        print(f"Your current account balance is: {self.account_balance}")
