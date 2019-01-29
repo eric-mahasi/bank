@@ -1,12 +1,13 @@
 import account
 import sys
 
+import random
+
 
 class Bank(object):
     """Driver class that runs the entire program."""
 
     def __init__(self):
-        self.lower_limit = 1000
         self.account_pin_confirm = 0
 
     def show_main_menu(self):
@@ -56,8 +57,6 @@ class Bank(object):
         """
         Create an account, passing user input into the parameters for
         Account objects.
-
-        Returns an Account object.
         """
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate information after each prompt"
@@ -67,20 +66,26 @@ class Bank(object):
         # TODO generate account ID sequentially from already existing accounts
         # self.account_id = int(input("Account ID: "))
 
+        # Temporary account id generation
+        # Generates random 6 digit integer
+        account_id = round(random.uniform(100_000, 999_999))
+
         while True:
             account_balance = int(input("Initial deposit amount: "))
-            if account_balance <= self.lower_limit:
-                print("Account balances lower than", self.lower_limit,
+
+            lower_limit = account.Account.LOWER_LIMIT
+            if account_balance <= lower_limit:
+                print("Account balances lower than", lower_limit,
                       "are not allowed. Please try again.")
             else:
                 break
+
         self.confirm_pin()
+
         self.user_account = account.Account(
-            account_name, account_id, account_balance,
-            deposit_amount, withdraw_amount)
+            account_name, account_id, account_balance)
         print("\nAccount creation successful. Welcome " +
               str(self.user_account.account_name.title()) + ".")
-        return self.user_account
 
     # FIXME PIN functionality works for only one iteration instead of
     # continually till the required conditions are met
