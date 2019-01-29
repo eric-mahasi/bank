@@ -7,9 +7,6 @@ import random
 class Bank(object):
     """Driver class that runs the entire program."""
 
-    def __init__(self):
-        self.account_pin_confirm = 0
-
     def show_main_menu(self):
         while True:
             menu_msg = ("\nPlease select an action "
@@ -80,16 +77,14 @@ class Bank(object):
             else:
                 break
 
-        self.confirm_pin()
+        account_pin = self.get_pin()
 
         self.user_account = account.Account(
-            account_name, account_id, account_balance)
+            account_name, account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome " +
               str(self.user_account.account_name.title()) + ".")
 
-    # FIXME PIN functionality works for only one iteration instead of
-    # continually till the required conditions are met
-    def confirm_pin(self):
+    def get_pin(self):
         """
         Handles a 4-digit number that will be used as a PIN for accessing user
         accounts. Ensures that the PIN is entered correctly by having the user
@@ -99,19 +94,18 @@ class Bank(object):
         """
         while True:
             account_pin = input("Account PIN: ")
-            # FIXME these if loops runs infinitely
-            if len(str(self.account_pin)) < 4:
+            if len(str(account_pin)) < 4:
                 print("PIN must be at least four digits.")
-                break
+                continue
             else:
-                self.account_pin_confirm = input("Please enter PIN again: ")
-                while True:
-                    if account_pin == self.account_pin_confirm:
-                        print("PIN successfully recorded.")
-                    else:
-                        print("PINs do not match. Please try again.")
-                        break
-                break
+                account_pin_confirm = input("Please enter PIN again: ")
+
+                if account_pin == account_pin_confirm:
+                    print("PIN successfully recorded.")
+                    break
+                else:
+                    print("PINs do not match. Please try again.")
+
         return account_pin
 
     def verify_login(self):
@@ -124,7 +118,7 @@ class Bank(object):
         account_name = input("Account name: ")
         account_id = input("Account ID: ")
         account_pin = input("Account PIN: ")
-        # self.confirm_pin()
+        # self.get_pin()
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account
         # details in the file

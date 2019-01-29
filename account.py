@@ -5,10 +5,12 @@ class Account(object):
     """
     LOWER_LIMIT = 1000
 
-    def __init__(self, account_name, account_id, account_balance=1000):
+    def __init__(
+            self, account_name, account_id, account_pin, account_balance=1000):
         self.account_name = account_name
         self.account_id = account_id
         self.account_balance = account_balance
+        self.account_pin = account_pin
 
     # Suggestion: Instead of having this function carry out the logic of
     # getting user input, why not have this functionality in the bank Class
