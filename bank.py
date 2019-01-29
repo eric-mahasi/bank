@@ -7,30 +7,28 @@ class Bank(object):
 
     def __init__(self):
         self.lower_limit = 1000
-        self.user_choice = 0
-        self.account_pin = 0
         self.account_pin_confirm = 0
-        self.menu_msg = ""
 
     def show_main_menu(self):
-        self.menu_msg = ("\nPlease select an action "
-                         "\n1---Withdraw"
-                         "\n2---Deposit"
-                         "\n3---Check balance"
-                         "\n4---Log out"
-                         "\n5---Exit")
-        print(self.menu_msg)
-        self.user_choice = int(input())
-        if self.user_choice == 1:
+        menu_msg = ("\nPlease select an action "
+                    "\n1---Withdraw"
+                    "\n2---Deposit"
+                    "\n3---Check balance"
+                    "\n4---Log out"
+                    "\n5---Exit")
+        print(menu_msg)
+
+        user_choice = int(input())
+        if user_choice == 1:
             self.object_name.withdraw()
-        elif self.user_choice == 2:
+        elif user_choice == 2:
             self.object_name.deposit()
-        elif self.user_choice == 3:
+        elif user_choice == 3:
             print("Your current account balance is: ",
                   self.object_name.account_balance)
-        elif self.user_choice == 4:
+        elif user_choice == 4:
             self.log_in_menu()
-        elif self.user_choice == 5:
+        elif user_choice == 5:
             print("Quitting... ")
             sys.exit()
         else:
@@ -46,10 +44,10 @@ class Bank(object):
         print("Welcome...")
         print("\nPlease select an action " +
               "\n1---Log into my account" + "\n2---Create new account")
-        self.user_choice = int(input())
-        if self.user_choice == 1:
+        user_choice = int(input())
+        if user_choice == 1:
             self.verify_login()
-        elif self.user_choice == 2:
+        elif user_choice == 2:
             self.create_account()
         else:
             print("Invalid choice. Please try again.")
@@ -65,22 +63,22 @@ class Bank(object):
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate information after each prompt"
               " below. ")
-        self.account_name = input("Account name: ")
+        account_name = input("Account name: ")
 
         # TODO generate account ID sequentially from already existing accounts
         # self.account_id = int(input("Account ID: "))
 
         while True:
-            self.account_balance = int(input("Initial deposit amount: "))
-            if self.account_balance <= self.lower_limit:
+            account_balance = int(input("Initial deposit amount: "))
+            if account_balance <= self.lower_limit:
                 print("Account balances lower than", self.lower_limit,
                       "are not allowed. Please try again.")
             else:
                 break
         self.confirm_pin()
         self.object_name = account.Account(
-            self.account_name, self.account_id, self.account_balance,
-            self.deposit_amount, self.withdraw_amount)
+            account_name, account_id, account_balance,
+            deposit_amount, withdraw_amount)
         print("\nAccount creation successful. Welcome " +
               str(self.object_name.account_name.title()) + ".")
         return self.object_name
@@ -96,7 +94,7 @@ class Bank(object):
         Returns PIN.
         """
         while True:
-            self.account_pin = input("Account PIN: ")
+            account_pin = input("Account PIN: ")
             # FIXME these if loops runs infinitely
             if len(str(self.account_pin)) < 4:
                 print("PIN must be at least four digits.")
@@ -104,13 +102,13 @@ class Bank(object):
             else:
                 self.account_pin_confirm = input("Please enter PIN again: ")
                 while True:
-                    if self.account_pin == self.account_pin_confirm:
+                    if account_pin == self.account_pin_confirm:
                         print("PIN successfully recorded.")
                     else:
                         print("PINs do not match. Please try again.")
                         break
                 break
-        return self.account_pin
+        return account_pin
 
     def verify_login(self):
         """
@@ -119,9 +117,9 @@ class Bank(object):
         """
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
-        self.account_name = input("Account name: ")
-        self.account_id = input("Account ID: ")
-        self.account_pin = input("Account PIN: ")
+        account_name = input("Account name: ")
+        account_id = input("Account ID: ")
+        account_pin = input("Account PIN: ")
         # self.confirm_pin()
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account
