@@ -8,17 +8,9 @@ class Bank(object):
     def __init__(self):
         self.lower_limit = 1000
         self.user_choice = 0
-        self.account_name = ""
-        self.account_id = 0
-        self.deposit_amount = 0
-        self.account_balance = 1000
-        self.withdraw_amount = 0
         self.account_pin = 0
         self.account_pin_confirm = 0
         self.menu_msg = ""
-        self.object_name = account.Account(
-            self.account_name, self.account_id, self.account_balance,
-            self.deposit_amount, self.withdraw_amount)
 
     def show_main_menu(self):
         self.menu_msg = ("\nPlease select an action "
