@@ -47,6 +47,7 @@ class Bank(object):
 
             if user_choice is not None:
                 user_choice()
+                break
             else:
                 print("Invalid choice. Please try again.")
 
