@@ -2,6 +2,7 @@ import random
 import sys
 
 import account
+from records import *
 
 
 class Bank(object):
@@ -30,9 +31,8 @@ class Bank(object):
                 # TODO Handle errors for non-int inputs maybe in unit tests
                 print("Invalid choice. Please try again: ")
 
-    # TODO add functionality:
-    # 1) Allow different users to access their own different accounts
-    # TODO move all the following methods to account class
+    # TODO add functionality: Allow different users to access their own
+    # different accounts
     def log_in_menu(self):
         """Allows users to navigate through the several menus."""
         while True:
@@ -84,6 +84,13 @@ class Bank(object):
             account_name, account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome " +
               str(self.user_account.account_name.title()) + ".")
+        stor = {'name': self.user_account.account_name,
+                'id': self.user_account.account_id,
+                'pin': self.user_account.account_pin,
+                'balance': self.user_account.account_balance}
+
+        self.record = Record()
+        self.record.write_to_file(stor)
 
     def get_pin(self):
         """
@@ -117,9 +124,7 @@ class Bank(object):
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
         account_name = input("Account name: ")
-        account_id = input("Account ID: ")
         account_pin = input("Account PIN: ")
-        # self.get_pin()
         # TODO compare these values with those stored in the file
         # TODO figure out how to handle storing and accessing user account
         # details in the file
