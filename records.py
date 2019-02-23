@@ -2,22 +2,38 @@ import csv
 
 
 class Record(object):
-    """This class stores and accesses stored user account information from a
-    csv
-    file.
     """
-# TODO increase security by encrypting file
-# TODO improve security by encrypting passwords
+    A class that stores and accesses stored user account data.
+
+    ...
+
+    Attributes
+    ----------
+    file_name : str
+        Name of the file that stores user data. This file is currently
+        in the root directory of the project.
+    account_dict : dictionary
+        The user data to be stored.
+
+    Methods
+    -------
+    write_to_file(account_dict)
+        Writes the data in the dictionary to the file.
+    read_from_file
+        Allows the data stored in the file to be accessed.
+
+    """
 
     def __init__(self):
         self.file_name = "records.csv"
 
     def write_to_file(self, account_dict):
-        """Stores user account information to a file.
+        """Writes user account information to the file.
 
-        Args:
-            account_dict: A dictionary containing some of the user account
-            details.
+        Parameters
+        ----------
+        account_dict : dictionary
+            The user account information to be stored.
         """
         with open(self.file_name, mode='a') as record_file:
             fieldnames = ['name', 'id', 'pin', 'balance']
@@ -25,6 +41,7 @@ class Record(object):
             record_writer.writerow(account_dict)
 
     def read_from_file(self):
+        """Allows the data stored in the file to be accessed."""
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             for row in record_reader:
