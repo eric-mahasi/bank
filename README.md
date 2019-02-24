@@ -12,3 +12,11 @@ I subjectively rate this project as having required an intermediate skill level 
  - providing meaningful commit messages.
 3. How objects work in Python.
 4. Proper documentation techniques and standards used in Python.
+
+# Usage instructions
+If Python is installed and this project has been cloned onto a local machine:
+``` 
+cd bank
+python bank.py
+```
+
