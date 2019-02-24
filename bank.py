@@ -2,13 +2,41 @@ import random
 import sys
 
 import account
-from records import *
+import records
 
 
 class Bank(object):
-    """Driver class that runs the entire program."""
+    """A class that simulates an ATM interface.
+
+    This class provides the user with a text-based user interface that
+    allows them to interact with their accounts and perform transactions
+    on them. This class also implements certain features which provide
+    extended functionality for user accounts.
+
+    ...
+
+    Attributes
+    ----------
+
+    Methods
+    -------
+    show_main_menu
+        Displays the menu that allows users to perform transactions.
+    log_in_menu
+        Displays the menu that enables users to log into their accounts.
+    create_account
+        Opens a new account.
+    get_pin
+        Generates the account pin.
+    verify_login
+        Enables registered users to log into their accounts.
+    quit
+        Exits the program.
+    """
 
     def show_main_menu(self):
+        """Displays the menu that allows users to select which
+        transactions they'd like to perform."""
         while True:
             menu_msg = ("\nPlease select an action "
                         "\n1---Withdraw"
@@ -34,7 +62,8 @@ class Bank(object):
     # TODO add functionality: Allow different users to access their own
     # different accounts
     def log_in_menu(self):
-        """Allows users to navigate through the several menus."""
+        """Displays the menu that allows registered users to log into their
+        accounts and new users to create accounts."""
         while True:
             print("Welcome...")
             print("\nPlease select an action "
@@ -52,18 +81,17 @@ class Bank(object):
                 print("Invalid choice. Please try again.")
 
     def create_account(self):
-        """
-        Create an account, passing user input into the parameters for
-        Account objects.
+        """Opens a new account.
+
+        The user provides details which are used to create a new account are
+        then stored
         """
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate information after each prompt"
               " below. ")
         account_name = input("Account name: ")
 
-        # TODO generate account ID sequentially from already existing accounts
-        # self.account_id = int(input("Account ID: "))
-
+        # TODO: Generate account ID sequentially from already existing accounts
         # Temporary account id generation
         # Generates random 6 digit integer
         account_id = round(random.uniform(100_000, 999_999))
@@ -84,22 +112,27 @@ class Bank(object):
             account_name, account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome " +
               str(self.user_account.account_name.title()) + ".")
-        stor = {'name': self.user_account.account_name,
-                'id': self.user_account.account_id,
-                'pin': self.user_account.account_pin,
-                'balance': self.user_account.account_balance}
+        account_details = {'name': self.user_account.account_name,
+                           'id': self.user_account.account_id,
+                           'pin': self.user_account.account_pin,
+                           'balance': self.user_account.account_balance}
 
-        self.record = Record()
-        self.record.write_to_file(stor)
+        self.record = records.Record()
+        self.record.write_to_file(account_details)
 
     def get_pin(self):
-        """
-        Handles a 4-digit number that will be used as a PIN for accessing user
-        accounts. Ensures that the PIN is entered correctly by having the user
-        enter it twice and the two entries are then compared to each other.
+        """Enables new users to enter a four digit PIN.
+        
+        This pin will then be used to access the user account on 
+        subsequent log ins.  
+        
+        Returns
+        -------
+        account_pin : int
+            The account PIN.
 
-        Returns PIN.
         """
+
         while True:
             account_pin = input("Account PIN: ")
             if len(str(account_pin)) < 4:
@@ -117,10 +150,12 @@ class Bank(object):
         return account_pin
 
     def verify_login(self):
+        """Enables registered users to access their accounts.
+        
+        The details provided by users on log in are compared against
+        the details stored in the file. 
         """
-        Check if account name and account id provided by user match those
-        stored in file.
-        """
+
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
         account_name = input("Account name: ")
@@ -130,6 +165,7 @@ class Bank(object):
         # details in the file
 
     def quit(self):
+        """Exit the program."""
         print("Quitting... ")
         sys.exit()
 
