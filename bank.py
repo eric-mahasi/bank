@@ -1,3 +1,4 @@
+import csv
 import random
 import sys
 
@@ -46,6 +47,8 @@ class Bank(object):
                         "\n5---Exit")
             print(menu_msg)
 
+            # BUG : This code block raises an AttributeError when `verify
+            # log in` is called.
             choices = {'1': self.user_account.withdraw,
                        '2': self.user_account.deposit,
                        '3': self.user_account.print_account_balance,
@@ -151,18 +154,22 @@ class Bank(object):
 
     def verify_login(self):
         """Enables registered users to access their accounts.
-        
+
         The details provided by users on log in are compared against
-        the details stored in the file. 
+        the details stored in the file.
         """
 
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
         account_name = input("Account name: ")
         account_pin = input("Account PIN: ")
-        # TODO compare these values with those stored in the file
-        # TODO figure out how to handle storing and accessing user account
-        # details in the file
+        self.file_name = "records.csv"
+        with open(self.file_name) as record_file:
+            record_reader = csv.reader(record_file, delimiter=',')
+            for row in record_reader:
+                if account_name == row[0] and account_pin == row[2]:
+                    print("Successfully logged in. Welcome",
+                          account_name.title(), ".")
 
     def quit(self):
         """Exit the program."""
