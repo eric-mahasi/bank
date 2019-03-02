@@ -47,8 +47,6 @@ class Bank(object):
                         "\n5---Exit")
             print(menu_msg)
 
-            # BUG : This code block raises an AttributeError when `verify
-            # log in` is called.
             choices = {'1': self.user_account.withdraw,
                        '2': self.user_account.deposit,
                        '3': self.user_account.print_account_balance,
@@ -125,10 +123,10 @@ class Bank(object):
 
     def get_pin(self):
         """Enables new users to enter a four digit PIN.
-        
-        This pin will then be used to access the user account on 
-        subsequent log ins.  
-        
+
+        This pin will then be used to access the user account on
+        subsequent log ins.
+
         Returns
         -------
         account_pin : int
@@ -170,6 +168,9 @@ class Bank(object):
                 if account_name == row[0] and account_pin == row[2]:
                     print("Successfully logged in. Welcome",
                           account_name.title(), ".")
+                    self.user_account = account.Account(
+                        row[0], row[1], row[2], row[3])
+                    break
 
     def quit(self):
         """Exit the program."""
