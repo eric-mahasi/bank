@@ -159,18 +159,33 @@ class Bank(object):
 
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
-        account_name = input("Account name: ")
-        account_pin = input("Account PIN: ")
-        self.file_name = "records.csv"
-        with open(self.file_name) as record_file:
-            record_reader = csv.reader(record_file, delimiter=',')
-            for row in record_reader:
-                if account_name == row[0] and account_pin == row[2]:
-                    print("Successfully logged in. Welcome",
-                          account_name.title(), ".")
-                    self.user_account = account.Account(
-                        row[0], row[1], row[2], row[3])
-                    break
+
+        file_name = "records.csv"
+
+        # Opening the first before the start of the while loop to have it in
+        # memory so as to prevent opening and closing of the file in case of
+        # incorrect details.
+        with open(file_name) as record_file:
+            verified = False
+            while not verified:
+                account_name = input("Account name: ")
+                account_pin = input("Account PIN: ")
+
+                # Changing the stream position to the start of the file
+                record_file.seek(0)
+                record_reader = csv.reader(record_file, delimiter=',')
+                for row in record_reader:
+                    if account_name == row[0] and account_pin == row[2]:
+                        print("Successfully logged in. Welcome",
+                              account_name.title(), ".")
+                        self.user_account = account.Account(
+                            row[0], row[1], row[2], row[3])
+
+                        verified = True
+                        break
+
+                if not verified:
+                    print("Incorrect details entered. Try again.")
 
     def quit(self):
         """Exit the program."""
