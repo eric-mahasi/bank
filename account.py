@@ -49,7 +49,7 @@ class Account(object):
         self.account_name = account_name
         self.account_id = account_id
         self.account_pin = account_pin
-        self.account_balance = account_balance
+        self.account_balance = int(account_balance)
 
     # Suggestion: Instead of having this function carry out the logic of
     # getting user input, why not have this functionality in the bank Class
