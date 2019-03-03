@@ -35,7 +35,7 @@ class Record(object):
         account_dict : dictionary
             The user account information to be stored.
         """
-        with open(self.file_name, mode='a') as record_file:
+        with open(self.file_name, mode='a', newline='') as record_file:
             fieldnames = ['name', 'id', 'pin', 'balance']
             record_writer = csv.DictWriter(record_file, fieldnames=fieldnames)
             record_writer.writerow(account_dict)
