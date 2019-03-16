@@ -35,10 +35,6 @@ class Bank(object):
         Exits the program.
     """
 
-    def __init__(self):
-        self.file_name = "records.csv"
-        self.record = records.Record()
-
     def show_main_menu(self):
         """Displays the menu that allows users to select which
         transactions they'd like to perform."""
@@ -122,6 +118,7 @@ class Bank(object):
                            'pin': self.user_account.account_pin,
                            'balance': self.user_account.account_balance}
 
+        self.record = records.Record()
         self.record.write_to_file(account_details)
 
     def get_pin(self):
@@ -164,6 +161,7 @@ class Bank(object):
         print("\nKindly enter the appropriate values after each prompt below.")
         account_name = input("Account name: ")
         account_pin = input("Account PIN: ")
+        self.file_name = "records.csv"
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             for row in record_reader:
