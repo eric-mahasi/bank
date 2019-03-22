@@ -6,6 +6,42 @@ import account
 import records
 
 
+def get_pin():
+    """Enables new users to enter a four digit PIN.
+
+    This pin will then be used to access the user account on
+    subsequent log ins.
+
+    Returns
+    -------
+    account_pin : int
+        The account PIN.
+
+    """
+
+    while True:
+        account_pin = input("Account PIN: ")
+        if len(str(account_pin)) < 4:
+            print("PIN must be at least four digits.")
+            continue
+        else:
+            account_pin_confirm = input("Please enter PIN again: ")
+
+            if account_pin == account_pin_confirm:
+                print("PIN successfully recorded.")
+                break
+            else:
+                print("PINs do not match. Please try again.")
+
+    return account_pin
+
+
+def quit():
+    """Exit the program."""
+    print("Quitting... ")
+    sys.exit()
+
+
 class Bank(object):
     """A class that simulates an ATM interface.
 
@@ -51,7 +87,7 @@ class Bank(object):
                        '2': self.user_account.deposit,
                        '3': self.user_account.print_account_balance,
                        '4': self.log_in_menu,
-                       '5': self.quit}
+                       '5': quit}
 
             user_choice = choices.get(input())
             if user_choice is not None:
@@ -104,7 +140,7 @@ class Bank(object):
             else:
                 break
 
-        account_pin = self.get_pin()
+        account_pin = get_pin()
 
         self.user_account = account.Account(
             account_name, account_id, account_pin, account_balance)
@@ -117,35 +153,6 @@ class Bank(object):
 
         self.record = records.Record()
         self.record.write_to_file(account_details)
-
-    def get_pin(self):
-        """Enables new users to enter a four digit PIN.
-
-        This pin will then be used to access the user account on
-        subsequent log ins.
-
-        Returns
-        -------
-        account_pin : int
-            The account PIN.
-
-        """
-
-        while True:
-            account_pin = input("Account PIN: ")
-            if len(str(account_pin)) < 4:
-                print("PIN must be at least four digits.")
-                continue
-            else:
-                account_pin_confirm = input("Please enter PIN again: ")
-
-                if account_pin == account_pin_confirm:
-                    print("PIN successfully recorded.")
-                    break
-                else:
-                    print("PINs do not match. Please try again.")
-
-        return account_pin
 
     def verify_login(self):
         """Enables registered users to access their accounts.
@@ -168,11 +175,6 @@ class Bank(object):
                     self.user_account = account.Account(
                         row[0], row[1], row[2], row[3])
                     break
-
-    def quit(self):
-        """Exit the program."""
-        print("Quitting... ")
-        sys.exit()
 
 
 # Objects for debugging purposes only
