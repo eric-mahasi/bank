@@ -179,7 +179,6 @@ class Bank(object):
                     break
 
 
-# Objects for debugging purposes only
-a = Bank()
-a.log_in_menu()
-a.show_main_menu()
+bank = Bank()
+bank.log_in_menu()
+bank.show_main_menu()
