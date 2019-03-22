@@ -57,11 +57,8 @@ class Bank(object):
             if user_choice is not None:
                 user_choice()
             else:
-                # TODO Handle errors for non-int inputs maybe in unit tests
                 print("Invalid choice. Please try again: ")
 
-    # TODO add functionality: Allow different users to access their own
-    # different accounts
     def log_in_menu(self):
         """Displays the menu that allows registered users to log into their
         accounts and new users to create accounts."""
