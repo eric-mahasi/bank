@@ -23,3 +23,6 @@ $ cd bank
 $ python bank.py
 ```
 
+# Acknowledgements
+This project was inspired by one of [Karan's](https://github.com/karan)
+projects. This is the full list of [Karan Projects](https://github.com/karan/projects).
