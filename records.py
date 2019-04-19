@@ -39,10 +39,3 @@ class Record(object):
             fieldnames = ['name', 'id', 'pin', 'balance']
             record_writer = csv.DictWriter(record_file, fieldnames=fieldnames)
             record_writer.writerow(account_dict)
-
-    def read_from_file(self):
-        """Allows the data stored in the file to be accessed."""
-        with open(self.file_name) as record_file:
-            record_reader = csv.reader(record_file, delimiter=',')
-            for row in record_reader:
-                pass
