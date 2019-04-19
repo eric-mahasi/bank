@@ -71,10 +71,10 @@ class Bank(object):
     """
 
     def __init__(self):
-        self.account_id = self.num_lines + 1
-        self.num_lines = sum(1 for line in open(self.file_name))
         self.record = records.Record()
         self.file_name = "records.csv"
+        self.num_lines = sum(1 for line in open(self.file_name))
+        self.account_id = self.num_lines + 1
 
     def show_main_menu(self):
         """Displays the menu that allows users to select which
@@ -145,7 +145,7 @@ class Bank(object):
         account_pin = get_pin()
 
         self.user_account = account.Account(
-            account_name, account_id, account_pin, account_balance)
+            account_name, self.account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome " +
               str(self.user_account.account_name.title()) + ".")
         account_details = {'name': self.user_account.account_name,
