@@ -1,5 +1,4 @@
 import csv
-import random
 import sys
 
 import account
@@ -132,7 +131,8 @@ class Bank(object):
         # TODO: Generate account ID sequentially from already existing accounts
         # Temporary account id generation
         # Generates random 6 digit integer
-        account_id = round(random.uniform(100_000, 999_999))
+        num_lines = sum(1 for line in open(self.file_name))
+        account_id = num_lines + 1
 
         while True:
             account_balance = int(input("Initial deposit amount: "))
