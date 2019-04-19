@@ -123,6 +123,8 @@ class Account(object):
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             lines = list(record_reader)
+            # TODO : Fix the indexing here such that the correct account
+            # balances are changed
             lines[0][3] = self.account_balance
             df = pd.DataFrame(lines)
             # Removing the top row on the dataframe
