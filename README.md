@@ -24,5 +24,13 @@ $ python bank.py
 ```
 
 # Acknowledgements
-This project was inspired by one of [Karan's](https://github.com/karan)
-projects. This is the full list of [Karan Projects](https://github.com/karan/projects).
+This project was inspired by one of Karan's projects. This is the full 
+list of [Karan Projects](https://github.com/karan/projects).
+The code by the following StackOverflow users was instrumental in helping
+me solve a significant number of problems:
+
+Kyle - [Counting number of lines in a file](https://stackoverflow.com/questions/845058/how-to-get-line-count-cheaply-in-python)
+
+Joe - [Removing top row of dataframe](https://stackoverflow.com/questions/51611378/remove-top-row-from-a-dataframe)
+
+Diego Navaro - [Changing specific values in a file](https://stackoverflow.com/questions/11033590/change-specific-value-in-csv-file-via-python)
