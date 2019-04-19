@@ -16,10 +16,10 @@ class Account(object):
         allowed to have.
     account_name : str
         the name associated with an account.
-    account_id :
-        a six digit integer used to uniquely identify user accounts.
+    account_id : int
+        a single number that uniquely identifies each account.
     account_pin : int
-        a six digit integer used to uniquely identify user accounts.
+        a four digit integer used to access user accounts.
     account_balance : int
         the amount of money currently in the account.
 
@@ -30,8 +30,9 @@ class Account(object):
     deposit
         Deposits money into the account.
     print_account_balance
-         the amount of money currently in the account.
         Displays the amount of money currently in the account.
+    update_balance
+        Changes the value of the account balance stored in the file.
     """
 
     LOWER_LIMIT = 1000
