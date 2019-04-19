@@ -19,9 +19,6 @@ class Record(object):
     -------
     write_to_file(account_dict)
         Writes the data in the dictionary to the file.
-    read_from_file
-        Allows the data stored in the file to be accessed.
-
     """
 
     def __init__(self):
