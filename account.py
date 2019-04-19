@@ -82,6 +82,7 @@ class Account(object):
                 print(
                     "Transaction successful. Your new account balance is "
                     f"{self.account_balance}")
+        self.update_balance(self.account_balance)
 
     def deposit(self):
         """Deposits money into the account.
