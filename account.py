@@ -1,3 +1,8 @@
+import csv
+
+import pandas as pd
+
+
 class Account(object):
     """A class that performs the basic functionality associated with a
     bank account.
@@ -46,6 +51,7 @@ class Account(object):
             The amount of money currently in the account.
         """
 
+        self.file_name = "records.csv"
         self.account_name = account_name
         self.account_id = account_id
         self.account_pin = account_pin
@@ -97,7 +103,19 @@ class Account(object):
         self.account_balance += deposit_amount
         print("Transaction successful. Your new account balance is",
               self.account_balance)
+        self.update_balance(self.account_balance)
 
     def print_account_balance(self):
         """Displays the amount of money currently in the account."""
         print(f"Your current account balance is: {self.account_balance}")
+
+    def update_balance(self, balance):
+        with open(self.file_name) as record_file:
+            record_reader = csv.reader(record_file, delimiter=',')
+            lines = list(record_reader)
+            lines[0][3] = self.account_balance
+            df = pd.DataFrame(lines)
+            df.columns = df.iloc[0]
+            df = df.reindex(df.index.drop(0)).reset_index(drop=True)
+            df.columns.name = None
+            df.to_csv(self.file_name, index=False)
