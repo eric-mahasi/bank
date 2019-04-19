@@ -3,7 +3,7 @@ import csv
 
 class Record(object):
     """
-    A class that stores and accesses stored user account data.
+    A class that stores user account data.
 
     ...
 
