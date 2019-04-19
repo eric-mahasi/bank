@@ -127,7 +127,8 @@ class Bank(object):
         print("\nKindly enter the appropriate information after each prompt"
               " below. ")
         account_name = input("Account name: ")
-
+        # Count the number of lines in the file, which is the number of
+        # existing user accounts.
         num_lines = sum(1 for line in open(self.file_name))
         account_id = num_lines + 1
 
