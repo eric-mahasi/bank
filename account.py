@@ -117,7 +117,7 @@ class Account(object):
             lines = list(record_reader)
             # TODO : Fix the indexing here such that the correct account
             # balances are changed
-            lines[0][3] = self.account_balance
+            lines[int(self.account_id) - 1][3] = self.account_balance
             df = pd.DataFrame(lines)
             # Removing the top row on the dataframe
             df.columns = df.iloc[0]
