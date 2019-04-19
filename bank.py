@@ -129,8 +129,8 @@ class Bank(object):
         account_name = input("Account name: ")
         # Count the number of lines in the file, which is the number of
         # existing user accounts.
-        num_lines = sum(1 for line in open(self.file_name))
-        account_id = num_lines + 1
+        self.num_lines = sum(1 for line in open(self.file_name))
+        self.account_id = self.num_lines + 1
 
         while True:
             account_balance = int(input("Initial deposit amount: "))
