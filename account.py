@@ -110,6 +110,16 @@ class Account(object):
         print(f"Your current account balance is: {self.account_balance}")
 
     def update_balance(self, balance):
+        """Changes the value of the account balance stored in the file.
+
+        Whenever a transaction is made, the resulting account balance in
+        the file is changed to reflect the new balance.
+
+        Parameters
+        ----------
+        balance : int
+            The new account balance
+        """
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             lines = list(record_reader)
