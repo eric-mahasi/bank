@@ -128,9 +128,6 @@ class Bank(object):
               " below. ")
         account_name = input("Account name: ")
 
-        # TODO: Generate account ID sequentially from already existing accounts
-        # Temporary account id generation
-        # Generates random 6 digit integer
         num_lines = sum(1 for line in open(self.file_name))
         account_id = num_lines + 1
 
