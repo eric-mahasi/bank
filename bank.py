@@ -71,6 +71,8 @@ class Bank(object):
     """
 
     def __init__(self):
+        self.account_id = self.num_lines + 1
+        self.num_lines = sum(1 for line in open(self.file_name))
         self.record = records.Record()
         self.file_name = "records.csv"
 
@@ -129,8 +131,6 @@ class Bank(object):
         account_name = input("Account name: ")
         # Count the number of lines in the file, which is the number of
         # existing user accounts.
-        self.num_lines = sum(1 for line in open(self.file_name))
-        self.account_id = self.num_lines + 1
 
         while True:
             account_balance = int(input("Initial deposit amount: "))
