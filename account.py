@@ -125,7 +125,9 @@ class Account(object):
             lines = list(record_reader)
             lines[0][3] = self.account_balance
             df = pd.DataFrame(lines)
+            # Removing the top row on the dataframe
             df.columns = df.iloc[0]
             df = df.reindex(df.index.drop(0)).reset_index(drop=True)
             df.columns.name = None
+            # Writing the dataframe data to the csv file
             df.to_csv(self.file_name, index=False)
