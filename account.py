@@ -103,7 +103,7 @@ class Account(object):
         """Displays the amount of money currently in the account."""
         print(f"Your current account balance is: {self.account_balance}")
 
-    def write_data(self, data, index):
+    def update_file(self, data, index):
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             lines = list(record_reader)
@@ -127,7 +127,7 @@ class Account(object):
         balance : int
             The new account balance to be written to the file
         """
-        self.write_data(balance, index=3)
+        self.update_file(balance, index=3)
 
     def edit_account_menu(self):
         """Displays a menu that allows registered users to change the
@@ -139,7 +139,7 @@ class Account(object):
             while True:
                 if name == confirm_name:
                     print("Account name successfully changed.")
-                    self.write_data(name, index=0)
+                    self.update_file(name, index=0)
                     break
                 else:
                     print("Account names don't match. Please try again.")
@@ -151,7 +151,7 @@ class Account(object):
             while True:
                 if pin == confirm_pin:
                     print("Account PIN successfully changed.")
-                    self.write_data(pin, index=2)
+                    self.update_file(pin, index=2)
                     break
                 else:
                     print("Account PINs don't match. Please try again.")
