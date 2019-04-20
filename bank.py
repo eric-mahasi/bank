@@ -107,7 +107,8 @@ class Bank(object):
             print("Welcome...")
             print("\nPlease select an action "
                   "\n1---Log into my account"
-                  "\n2---Create new account")
+                  "\n2---Create new account"
+                  "\n3---Exit")
 
             choices = {'1': self.verify_login,
                        '2': self.create_account}
