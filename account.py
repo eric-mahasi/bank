@@ -118,8 +118,11 @@ class Account(object):
             detail will be changed.
         """
         with open(self.file_name) as record_file:
+            # Read the entire file and store each line in a list
             record_reader = csv.reader(record_file, delimiter=',')
             lines = list(record_reader)
+            # The value located at a specified position is assigned the
+            # new data
             lines[int(self.account_id) - 1][index] = data
             df = pd.DataFrame(lines)
             # Removing the top row on the dataframe
