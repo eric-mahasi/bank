@@ -104,6 +104,19 @@ class Account(object):
         print(f"Your current account balance is: {self.account_balance}")
 
     def update_file(self, data, index):
+        """Changes the values of stored user account details.
+
+        Overwrite the currently stored user account details with new and
+        up to date information.
+
+        Parameters
+        ----------
+        data : int, str
+            The new information that will be written to the file.
+        index : int
+            The row position in the file, representing which account
+            detail will be changed.
+        """
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
             lines = list(record_reader)
