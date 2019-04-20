@@ -130,7 +130,7 @@ class Bank(object):
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate information after each prompt"
               " below. ")
-        account_name = input("Account name: ")
+        account_name = input("Account name: ").lower()
         while True:
             account_balance = int(input("Initial deposit amount: "))
 
@@ -166,7 +166,7 @@ class Bank(object):
 
         print("Please be patient while we verify your details...")
         print("\nKindly enter the appropriate values after each prompt below.")
-        account_name = input("Account name: ")
+        account_name = input("Account name: ").lower()
         account_pin = input("Account PIN: ")
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
