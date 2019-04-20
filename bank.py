@@ -82,15 +82,16 @@ class Bank(object):
                         "\n1---Withdraw"
                         "\n2---Deposit"
                         "\n3---Check balance"
-                        "\n4---Log out"
-                        "\n5---Exit")
+                        "\n4---Edit account details"
+                        "\n5---Log out"
+                        "\n6---Exit")
             print(menu_msg)
 
             choices = {'1': self.user_account.withdraw,
                        '2': self.user_account.deposit,
                        '3': self.user_account.print_account_balance,
-                       '4': self.log_in_menu,
-                       '5': quit}
+                       '5': self.log_in_menu,
+                       '6': quit}
 
             user_choice = choices.get(input())
             if user_choice is not None:
