@@ -12,10 +12,15 @@ common transactions that checkings accounts provide.
 3. How objects work in Python.
 4. Proper documentation techniques and standards used in Python.
 
-# Usage Instructions
+# Getting Started
 This project requires Python to run. Install it by following the
-instructions [here](https://www/python.org/downloads). 
+instructions [here](https://www/python.org/downloads).
+ 
+## Prerequisites
+The ```pandas``` library is required for this project. Install it by 
+following the [installation instructions](http://pandas.pydata.org/pandas-docs/stable/install.html).
 
+# Usage Instructions
 Once the project has been cloned, run it by typing the following
 commands in a terminal:
 ``` 
@@ -26,6 +31,7 @@ $ python bank.py
 # Acknowledgements
 This project was inspired by one of Karan's projects. This is the full 
 list of [Karan Projects](https://github.com/karan/projects).
+
 The code by the following StackOverflow users was instrumental in helping
 me solve a significant number of problems:
 
