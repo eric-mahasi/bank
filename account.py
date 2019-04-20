@@ -131,11 +131,12 @@ class Account(object):
         stored details associated with their account."""
 
         def change_name():
-            name = input("Enter new account name")
-            confirm_name = input("Please enter new account name again")
+            name = input("Enter new account name: ")
+            confirm_name = input("Please enter new account name again: ")
             while True:
                 if name == confirm_name:
-                    print("Account name successfully changed to", confirm_name)
+                    print("Account name successfully changed to", confirm_name,
+                          ".")
                     with open(self.file_name) as record_file:
                         record_reader = csv.reader(record_file, delimiter=',')
                         lines = list(record_reader)
@@ -159,7 +160,7 @@ class Account(object):
             confirm_pin = int(input("Please enter new account PIN again: "))
             while True:
                 if pin == confirm_pin:
-                    print("Account PIN successfully changed")
+                    print("Account PIN successfully changed.")
                     with open(self.file_name) as record_file:
                         record_reader = csv.reader(record_file, delimiter=',')
                         lines = list(record_reader)
@@ -191,4 +192,4 @@ class Account(object):
                 user_choice()
                 break
             else:
-                print("Invalid choice. Please try again")
+                print("Invalid choice. Please try again.")
