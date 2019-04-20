@@ -103,6 +103,19 @@ class Account(object):
         """Displays the amount of money currently in the account."""
         print(f"Your current account balance is: {self.account_balance}")
 
+    def write_data(self, data, index):
+        with open(self.file_name) as record_file:
+            record_reader = csv.reader(record_file, delimiter=',')
+            lines = list(record_reader)
+            lines[int(self.account_id) - 1][index] = data
+            df = pd.DataFrame(lines)
+            # Removing the top row on the dataframe
+            df.columns = df.iloc[0]
+            df = df.reindex(df.index.drop(0)).reset_index(drop=True)
+            df.columns.name = None
+            # Writing the dataframe data to the csv file
+            df.to_csv(self.file_name, index=False)
+
     def update_balance(self, balance):
         """Changes the value of the account balance stored in the file.
 
@@ -114,17 +127,7 @@ class Account(object):
         balance : int
             The new account balance to be written to the file
         """
-        with open(self.file_name) as record_file:
-            record_reader = csv.reader(record_file, delimiter=',')
-            lines = list(record_reader)
-            lines[int(self.account_id) - 1][3] = self.account_balance
-            df = pd.DataFrame(lines)
-            # Removing the top row on the dataframe
-            df.columns = df.iloc[0]
-            df = df.reindex(df.index.drop(0)).reset_index(drop=True)
-            df.columns.name = None
-            # Writing the dataframe data to the csv file
-            df.to_csv(self.file_name, index=False)
+        self.write_data(balance, index=3)
 
     def edit_account_menu(self):
         """Displays a menu that allows registered users to change the
@@ -135,21 +138,8 @@ class Account(object):
             confirm_name = input("Please enter new account name again: ")
             while True:
                 if name == confirm_name:
-                    print("Account name successfully changed to", confirm_name,
-                          ".")
-                    with open(self.file_name) as record_file:
-                        record_reader = csv.reader(record_file, delimiter=',')
-                        lines = list(record_reader)
-                        lines[int(self.account_id) - 1][
-                            0] = confirm_name
-                        df = pd.DataFrame(lines)
-                        # Removing the top row on the dataframe
-                        df.columns = df.iloc[0]
-                        df = df.reindex(df.index.drop(0)).reset_index(
-                            drop=True)
-                        df.columns.name = None
-                        # Writing the dataframe data to the csv file
-                        df.to_csv(self.file_name, index=False)
+                    print("Account name successfully changed.")
+                    self.write_data(name, index=0)
                     break
                 else:
                     print("Account names don't match. Please try again.")
@@ -161,19 +151,7 @@ class Account(object):
             while True:
                 if pin == confirm_pin:
                     print("Account PIN successfully changed.")
-                    with open(self.file_name) as record_file:
-                        record_reader = csv.reader(record_file, delimiter=',')
-                        lines = list(record_reader)
-                        lines[int(self.account_id) - 1][
-                            2] = confirm_pin
-                        df = pd.DataFrame(lines)
-                        # Removing the top row on the dataframe
-                        df.columns = df.iloc[0]
-                        df = df.reindex(df.index.drop(0)).reset_index(
-                            drop=True)
-                        df.columns.name = None
-                        # Writing the dataframe data to the csv file
-                        df.to_csv(self.file_name, index=False)
+                    self.write_data(pin, index=2)
                     break
                 else:
                     print("Account PINs don't match. Please try again.")
