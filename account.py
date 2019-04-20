@@ -112,7 +112,7 @@ class Account(object):
         Parameters
         ----------
         balance : int
-            The new account balance
+            The new account balance to be written to the file
         """
         with open(self.file_name) as record_file:
             record_reader = csv.reader(record_file, delimiter=',')
