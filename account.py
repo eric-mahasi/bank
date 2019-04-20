@@ -134,6 +134,7 @@ class Account(object):
         stored details associated with their account."""
 
         def change_name():
+            """Changes the account name stored in the file."""
             name = input("Enter new account name: ").lower()
             confirm_name = input(
                 "Please enter new account name again: ").lower()
@@ -147,6 +148,7 @@ class Account(object):
                     break
 
         def change_pin():
+            """Changes the account PIN stored in the file."""
             pin = int(input("Enter new account PIN: "))
             confirm_pin = int(input("Please enter new account PIN again: "))
             while True:
