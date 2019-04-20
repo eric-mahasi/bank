@@ -118,6 +118,24 @@ class Bank(object):
             else:
                 print("Invalid choice. Please try again.")
 
+    def edit_account_menu(self):
+        """Displays a menu that allows registered users to change the
+        stored details associated with their account."""
+        while True:
+            print("\nPlease select an action "
+                  "\n1---Change account name"
+                  "\n2---Change account PIN")
+
+            choices = {'1': self.user_account.change_name,
+                       '2': self.user_account.change_pin}
+            user_choice = choices.get(input())
+
+            if user_choice is not None:
+                user_choice()
+                break
+            else:
+                print("Invalid choice. Please try again")
+
     def create_account(self):
         """Opens a new account.
 
