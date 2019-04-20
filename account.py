@@ -152,6 +152,31 @@ class Account(object):
                     break
                 else:
                     print("Account names don't match. Please try again.")
+                    break
+
+        def change_pin():
+            pin = int(input("Enter new account PIN: "))
+            confirm_pin = int(input("Please enter new account PIN again: "))
+            while True:
+                if pin == confirm_pin:
+                    print("Account PIN successfully changed")
+                    with open(self.file_name) as record_file:
+                        record_reader = csv.reader(record_file, delimiter=',')
+                        lines = list(record_reader)
+                        lines[int(self.account_id) - 1][
+                            2] = confirm_pin
+                        df = pd.DataFrame(lines)
+                        # Removing the top row on the dataframe
+                        df.columns = df.iloc[0]
+                        df = df.reindex(df.index.drop(0)).reset_index(
+                            drop=True)
+                        df.columns.name = None
+                        # Writing the dataframe data to the csv file
+                        df.to_csv(self.file_name, index=False)
+                    break
+                else:
+                    print("Account PINs don't match. Please try again.")
+                    break
 
         while True:
             print("\nPlease select an action "
@@ -159,7 +184,7 @@ class Account(object):
                   "\n2---Change account PIN")
 
             choices = {'1': change_name,
-                       '2': change_name}
+                       '2': change_pin}
             user_choice = choices.get(input())
 
             if user_choice is not None:
