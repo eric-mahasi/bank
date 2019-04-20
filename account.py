@@ -136,7 +136,20 @@ class Account(object):
             while True:
                 if name == confirm_name:
                     print("Account name successfully changed to", confirm_name)
-                    pass
+                    with open(self.file_name) as record_file:
+                        record_reader = csv.reader(record_file, delimiter=',')
+                        lines = list(record_reader)
+                        lines[int(self.account_id) - 1][
+                            0] = confirm_name
+                        df = pd.DataFrame(lines)
+                        # Removing the top row on the dataframe
+                        df.columns = df.iloc[0]
+                        df = df.reindex(df.index.drop(0)).reset_index(
+                            drop=True)
+                        df.columns.name = None
+                        # Writing the dataframe data to the csv file
+                        df.to_csv(self.file_name, index=False)
+                    break
                 else:
                     print("Account names don't match. Please try again.")
 
@@ -146,7 +159,7 @@ class Account(object):
                   "\n2---Change account PIN")
 
             choices = {'1': change_name,
-                       '2': self.change_pin}
+                       '2': change_name}
             user_choice = choices.get(input())
 
             if user_choice is not None:
