@@ -134,8 +134,9 @@ class Account(object):
         stored details associated with their account."""
 
         def change_name():
-            name = input("Enter new account name: ")
-            confirm_name = input("Please enter new account name again: ")
+            name = input("Enter new account name: ").lower()
+            confirm_name = input(
+                "Please enter new account name again: ").lower()
             while True:
                 if name == confirm_name:
                     print("Account name successfully changed.")
