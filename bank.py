@@ -111,7 +111,8 @@ class Bank(object):
                   "\n3---Exit")
 
             choices = {'1': self.verify_login,
-                       '2': self.create_account}
+                       '2': self.create_account,
+                       '3': quit}
             user_choice = choices.get(input())
 
             if user_choice is not None:
