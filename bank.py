@@ -181,6 +181,10 @@ class Bank(object):
                             self.user_account = account.Account(
                                 row[0], row[1], row[2], row[3])
                             break
+                        else:
+                            print("Wrong details entered. Please try again.")
+                            self.verify_login()
+                            break
                 break
             else:
                 print("Records file not found.")
