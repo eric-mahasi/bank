@@ -79,7 +79,6 @@ class Account(object):
                     f"{self.LOWER_LIMIT} are not allowed. Please try again.")
                 self.account_balance += withdraw_amount
             else:
-                # self.account_balance -= withdraw_amount
                 print(
                     "Transaction successful. Your new account balance is "
                     f"{self.account_balance}", ".")
