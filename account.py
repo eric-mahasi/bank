@@ -58,7 +58,7 @@ class Account(object):
         self.account_pin = account_pin
         self.account_balance = int(account_balance)
         self.transaction_prompt = str("Transaction successful. Your new "
-                                      "account balance is ")
+                                      "account balance is:")
 
     def withdraw(self):
         """Withdraws money from the account.
@@ -99,8 +99,7 @@ class Account(object):
 
     def print_account_balance(self):
         """Displays the amount of money currently in the account."""
-        print("Your current account balance is: " f"{self.account_balance}",
-              ".")
+        print("Your current account balance is: " f"{self.account_balance}")
 
     def update_file(self, data, index):
         """Changes the values of stored user account details.
