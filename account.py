@@ -99,7 +99,7 @@ class Account(object):
 
     def print_account_balance(self):
         """Displays the amount of money currently in the account."""
-        print("Your current account balance is:" f"{self.account_balance}",
+        print("Your current account balance is: " f"{self.account_balance}",
               ".")
 
     def update_file(self, data, index):
