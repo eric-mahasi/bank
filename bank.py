@@ -150,8 +150,8 @@ class Bank(object):
             account_id = 1
         self.user_account = account.Account(
             account_name, account_id, account_pin, account_balance)
-        print("\nAccount creation successful. Welcome " +
-              str(self.user_account.account_name.title()) + ".")
+        print("\nAccount creation successful. Welcome ",
+              f"{str(self.user_account.account_name.title())}", ".")
         account_details = {'name': self.user_account.account_name,
                            'id': self.user_account.account_id,
                            'pin': self.user_account.account_pin,
