@@ -182,12 +182,13 @@ class Bank(object):
                                 row[0], row[1], row[2], row[3])
                             break
                         else:
-                            print("Wrong details entered. Please try again.")
+                            print("Wrong name or PIN entered. Please try "
+                                  "again.")
                             self.verify_login()
                             break
                 break
             else:
-                print("Records file not found.")
+                print("No stored account details found.")
                 self.create_account()
 
 
