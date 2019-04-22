@@ -135,7 +135,7 @@ class Bank(object):
 
             lower_limit = account.Account.LOWER_LIMIT
             if account_balance <= lower_limit:
-                print("Account balances lower than", lower_limit,
+                print("Account balances lower than", f"{lower_limit}",
                       "are not allowed. Please try again.")
             else:
                 break
