@@ -143,8 +143,11 @@ class Bank(object):
         account_pin = get_pin()
         # Count the number of lines in the file, which is the number of
         # existing user accounts.
-        num_lines = sum(1 for line in open(self.file_name))
-        account_id = num_lines + 1
+        if exists(self.file_name):
+            num_lines = sum(1 for line in open(self.file_name))
+            account_id = num_lines + 1
+        else:
+            account_id = 1
         self.user_account = account.Account(
             account_name, account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome " +
@@ -181,7 +184,7 @@ class Bank(object):
                 break
             else:
                 print("Records file not found.")
-                quit()
+                self.create_account()
 
 
 bank = Bank()
