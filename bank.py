@@ -90,8 +90,7 @@ class Bank(object):
                        '2': self.user_account.deposit,
                        '3': self.user_account.print_account_balance,
                        '4': self.user_account.edit_account_menu,
-                       '5': self.log_in_menu,
-                       '6': quit}
+                       '5': quit}
 
             user_choice = choices.get(input())
             if user_choice is not None:
