@@ -83,8 +83,7 @@ class Bank(object):
                         "\n2---Deposit"
                         "\n3---Check balance"
                         "\n4---Edit account details"
-                        "\n5---Log out"
-                        "\n6---Exit")
+                        "\n5---Log out and exit")
             print(menu_msg)
 
             choices = {'1': self.user_account.withdraw,
