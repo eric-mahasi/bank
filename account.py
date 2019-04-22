@@ -82,7 +82,7 @@ class Account(object):
                 # self.account_balance -= withdraw_amount
                 print(
                     "Transaction successful. Your new account balance is "
-                    f"{self.account_balance}")
+                    f"{self.account_balance}", ".")
         self.update_balance(self.account_balance)
 
     def deposit(self):
@@ -96,12 +96,12 @@ class Account(object):
 
         self.account_balance += deposit_amount
         print("Transaction successful. Your new account balance is",
-              self.account_balance)
+              self.account_balance, ".")
         self.update_balance(self.account_balance)
 
     def print_account_balance(self):
         """Displays the amount of money currently in the account."""
-        print(f"Your current account balance is: {self.account_balance}")
+        print(f"Your current account balance is: {self.account_balance}", ".")
 
     def update_file(self, data, index):
         """Changes the values of stored user account details.
