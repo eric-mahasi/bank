@@ -57,8 +57,8 @@ class Account(object):
         self.account_id = account_id
         self.account_pin = account_pin
         self.account_balance = int(account_balance)
-        self.transaction_prompt = "Transaction successful. Your new account " \
-                                  "balance is " f"{self.account_balance}", "."
+        self.transaction_prompt = str("Transaction successful. Your new "
+                                      "account balance is ")
 
     def withdraw(self):
         """Withdraws money from the account.
@@ -81,7 +81,7 @@ class Account(object):
                     f"{self.LOWER_LIMIT} are not allowed. Please try again.")
                 self.account_balance += withdraw_amount
             else:
-                print(self.transaction_prompt)
+                print(self.transaction_prompt, self.account_balance)
         self.update_balance(self.account_balance)
 
     def deposit(self):
@@ -94,7 +94,7 @@ class Account(object):
         deposit_amount = int(input(prompt))
 
         self.account_balance += deposit_amount
-        print(self.transaction_prompt)
+        print(self.transaction_prompt, self.account_balance)
         self.update_balance(self.account_balance)
 
     def print_account_balance(self):
