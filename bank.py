@@ -151,7 +151,7 @@ class Bank(object):
         self.user_account = account.Account(
             account_name, account_id, account_pin, account_balance)
         print("\nAccount creation successful. Welcome ",
-              f"{str(self.user_account.account_name.title())}", ".")
+              f"{str(self.user_account.account_name.title())}")
         account_details = {'name': self.user_account.account_name,
                            'id': self.user_account.account_id,
                            'pin': self.user_account.account_pin,
@@ -177,7 +177,7 @@ class Bank(object):
                     for row in record_reader:
                         if account_name == row[0] and account_pin == row[2]:
                             print("Successfully logged in. Welcome",
-                                  account_name.title(), ".")
+                                  account_name.title())
                             self.user_account = account.Account(
                                 row[0], row[1], row[2], row[3])
                             break
