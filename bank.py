@@ -1,5 +1,6 @@
 import csv
 import sys
+from os.path import exists
 
 import account
 import records
@@ -161,20 +162,26 @@ class Bank(object):
         The details provided by users on log in are compared against
         the details stored in the file.
         """
-
-        print("Please be patient while we verify your details...")
-        print("\nKindly enter the appropriate values after each prompt below.")
-        account_name = input("Account name: ").lower()
-        account_pin = input("Account PIN: ")
-        with open(self.file_name) as record_file:
-            record_reader = csv.reader(record_file, delimiter=',')
-            for row in record_reader:
-                if account_name == row[0] and account_pin == row[2]:
-                    print("Successfully logged in. Welcome",
-                          account_name.title(), ".")
-                    self.user_account = account.Account(
-                        row[0], row[1], row[2], row[3])
-                    break
+        while True:
+            if exists(self.file_name):
+                print("Please be patient while we verify your details...")
+                print("\nKindly enter the appropriate values after each prompt"
+                      " below.")
+                account_name = input("Account name: ").lower()
+                account_pin = input("Account PIN: ")
+                with open(self.file_name) as record_file:
+                    record_reader = csv.reader(record_file, delimiter=',')
+                    for row in record_reader:
+                        if account_name == row[0] and account_pin == row[2]:
+                            print("Successfully logged in. Welcome",
+                                  account_name.title(), ".")
+                            self.user_account = account.Account(
+                                row[0], row[1], row[2], row[3])
+                            break
+                break
+            else:
+                print("Records file not found.")
+                quit()
 
 
 bank = Bank()
