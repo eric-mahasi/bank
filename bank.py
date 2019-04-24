@@ -63,12 +63,8 @@ class Bank(object):
         Displays the menu that enables users to log into their accounts.
     create_account
         Opens a new account.
-    get_pin
-        Generates the account pin.
     verify_login
         Enables registered users to log into their accounts.
-    quit
-        Exits the program.
     """
 
     def __init__(self):
@@ -123,8 +119,8 @@ class Bank(object):
     def create_account(self):
         """Opens a new account.
 
-        The user provides details which are used to create a new account are
-        then stored
+        The user provides details which are used to create a new
+        account. These details are then stored to the file.
         """
         print("Please be patient while we set up an account for you... ")
         print("\nKindly enter the appropriate information after each prompt"
@@ -163,7 +159,8 @@ class Bank(object):
         """Enables registered users to access their accounts.
 
         The details provided by users on log in are compared against
-        the details stored in the file.
+        the details stored in the file. If the input details match the
+        ones in the file, then access to an account is granted.
         """
         while True:
             if exists(self.file_name):

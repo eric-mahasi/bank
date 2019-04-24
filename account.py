@@ -33,6 +33,8 @@ class Account(object):
         Displays the amount of money currently in the account.
     update_balance
         Changes the value of the account balance stored in the file.
+    update_file
+        Changes the values of stored user account details.
     """
 
     LOWER_LIMIT = 1000
